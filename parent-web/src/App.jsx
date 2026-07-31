@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from './lib/AuthContext.jsx'
+import Welcome from './pages/Welcome.jsx'
 import Login from './pages/Login.jsx'
 import AddChild from './pages/AddChild.jsx'
 import AppShell from './components/AppShell.jsx'
@@ -14,13 +16,22 @@ import ClassPage from './pages/ClassPage.jsx'
 import Surveys from './pages/Surveys.jsx'
 import Profile from './pages/Profile.jsx'
 
+function AuthGate() {
+  const [view, setView] = useState('welcome') // 'welcome' | 'signin' | 'signup'
+
+  if (view === 'welcome') {
+    return <Welcome onSignIn={() => setView('signin')} onCreateAccount={() => setView('signup')} />
+  }
+  return <Login initialMode={view} onBack={() => setView('welcome')} />
+}
+
 export default function App() {
   const { session, kids, loading } = useAuth()
 
   if (loading) {
     return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)', fontSize: 13 }}>Loading…</div>
   }
-  if (!session) return <Login />
+  if (!session) return <AuthGate />
   if (!kids || kids.length === 0) return <AddChild />
 
   return (

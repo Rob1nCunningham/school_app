@@ -13,7 +13,7 @@ export default function Index() {
       </View>
     )
   }
-  if (!session) return <Redirect href="/login" />
+  if (!session) return <Redirect href="/welcome" />
   if (!kids || kids.length === 0) return <Redirect href="/add-child" />
   return <Redirect href="/(tabs)/home" />
 }

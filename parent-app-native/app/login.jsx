@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { View, Text, TextInput, KeyboardAvoidingView, Platform, StyleSheet } from 'react-native'
+import { router, useLocalSearchParams } from 'expo-router'
 import { supabase } from '../src/lib/supabaseClient.js'
 import { colors } from '../src/lib/theme.js'
 import { PrimaryButton, GhostButton } from '../src/components/ui.jsx'
 
 export default function Login() {
-  const [mode, setMode] = useState('signin')
+  const { mode: initialMode } = useLocalSearchParams()
+  const [mode, setMode] = useState(initialMode === 'signup' ? 'signup' : 'signin')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
@@ -39,7 +41,7 @@ export default function Login() {
       style={{ flex: 1, backgroundColor: colors.surface2, alignItems: 'center', justifyContent: 'center', padding: 20 }}
     >
       <View style={{ width: '100%', maxWidth: 340 }}>
-        <Text style={styles.title}>Welcome</Text>
+        <Text style={styles.title}>{mode === 'signin' ? 'Sign in' : 'Create account'}</Text>
         <Text style={styles.sub}>
           {mode === 'signin' ? "Sign in to see what's happening at your child's school." : 'Create your parent account.'}
         </Text>
@@ -76,6 +78,11 @@ export default function Login() {
             setError(null)
             setInfo(null)
           }}
+        />
+        <GhostButton
+          title="Back"
+          onPress={() => (router.canGoBack() ? router.back() : router.replace('/welcome'))}
+          textStyle={{ color: colors.textMuted, fontWeight: '400' }}
         />
       </View>
     </KeyboardAvoidingView>

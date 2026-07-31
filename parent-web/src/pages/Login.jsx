@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { supabase } from '../lib/supabaseClient.js'
 
-export default function Login() {
-  const [mode, setMode] = useState('signin')
+export default function Login({ initialMode = 'signin', onBack }) {
+  const [mode, setMode] = useState(initialMode)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
@@ -34,7 +34,7 @@ export default function Login() {
   return (
     <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
       <div style={{ width: '100%', maxWidth: 340 }}>
-        <h1 style={{ fontSize: 22, marginBottom: 4 }}>Welcome</h1>
+        <h1 style={{ fontSize: 22, marginBottom: 4 }}>{mode === 'signin' ? 'Sign in' : 'Create account'}</h1>
         <p style={{ fontSize: 13, color: 'var(--text-secondary)', margin: '0 0 20px' }}>
           {mode === 'signin' ? 'Sign in to see what\'s happening at your child\'s school.' : 'Create your parent account.'}
         </p>
@@ -57,6 +57,11 @@ export default function Login() {
           style={{ width: '100%', marginTop: 10, background: 'none', border: 'none', color: 'var(--text-accent)' }}>
           {mode === 'signin' ? "New here? Create an account" : 'Already have an account? Sign in'}
         </button>
+        {onBack && (
+          <button onClick={onBack} style={{ width: '100%', marginTop: 4, background: 'none', border: 'none', color: 'var(--text-muted)', fontSize: 12 }}>
+            Back
+          </button>
+        )}
       </div>
     </div>
   )
