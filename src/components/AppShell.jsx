@@ -6,7 +6,17 @@ export default function AppShell() {
 
   const links = isTeacher
     ? [['/class-page', 'My class page'], ['/messages', 'Messages']]
-    : [['/dashboard', 'Dashboard'], ['/messages', 'Messages'], ['/students', 'Students']]
+    : [
+        ['/dashboard', 'Dashboard'],
+        ['/messages', 'Messages'],
+        ['/calendar', 'Calendar'],
+        ['/consent', 'Consent and absence'],
+        ['/newsletters', 'Newsletters'],
+        ['/letters', 'Letters home'],
+        ['/class-pages', 'Class pages'],
+        ['/surveys', 'Surveys'],
+        ['/students', 'Students']
+      ]
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>

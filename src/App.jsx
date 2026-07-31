@@ -7,6 +7,12 @@ import Dashboard from './pages/Dashboard.jsx'
 import Messages from './pages/Messages.jsx'
 import Students from './pages/Students.jsx'
 import ClassPage from './pages/ClassPage.jsx'
+import Calendar from './pages/Calendar.jsx'
+import Consent from './pages/Consent.jsx'
+import Newsletters from './pages/Newsletters.jsx'
+import Letters from './pages/Letters.jsx'
+import ClassPagesAdmin from './pages/ClassPagesAdmin.jsx'
+import Surveys from './pages/Surveys.jsx'
 
 export default function App() {
   const { session, staffMember, isTeacher, loading } = useAuth()
@@ -30,6 +36,12 @@ export default function App() {
           <>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/messages" element={<Messages />} />
+            <Route path="/calendar" element={<Calendar />} />
+            <Route path="/consent" element={<Consent />} />
+            <Route path="/newsletters" element={<Newsletters />} />
+            <Route path="/letters" element={<Letters />} />
+            <Route path="/class-pages" element={<ClassPagesAdmin />} />
+            <Route path="/surveys" element={<Surveys />} />
             <Route path="/students" element={<Students />} />
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </>
