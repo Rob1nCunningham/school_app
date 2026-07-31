@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "School App",
+    "slug": "parent-app-native",
+    "scheme": "schoolapp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.schoolapp.parent"
+    },
+    "android": {
+      "package": "com.schoolapp.parent",
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#2F6FE0"
+        }
+      ]
+    ],
+    "extra": {
+      "router": {}
+    }
+  }
+}
