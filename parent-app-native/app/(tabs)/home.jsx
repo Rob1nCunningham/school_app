@@ -8,6 +8,7 @@ import { GhostButton } from '../../src/components/ui.jsx'
 const TILES = [
   ['/consent', 'Consent & absence', 'shield-checkmark-outline', '#2F6FE0'],
   ['/calendar', 'Calendar', 'calendar-outline', '#1d9e75'],
+  ['/term-dates', 'Term dates', 'calendar-number-outline', '#1d9e75'],
   ['/newsletters', 'Newsletters', 'newspaper-outline', '#d85a30'],
   ['/letters', 'Letters home', 'mail-outline', '#8a5cf6'],
   ['/class-page', 'Class page', 'people-outline', '#e0872f'],

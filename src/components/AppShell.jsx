@@ -10,6 +10,7 @@ export default function AppShell() {
         ['/dashboard', 'Dashboard'],
         ['/messages', 'Messages'],
         ['/calendar', 'Calendar'],
+        ['/term-dates', 'Term dates'],
         ['/consent', 'Consent and absence'],
         ['/newsletters', 'Newsletters'],
         ['/letters', 'Letters home'],

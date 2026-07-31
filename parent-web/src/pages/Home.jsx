@@ -4,6 +4,7 @@ import ChildStack from '../components/ChildStack.jsx'
 const TILES = [
   ['/consent', 'Consent & absence', 'ti-shield-check', '#2F6FE0'],
   ['/calendar', 'Calendar', 'ti-calendar', '#1d9e75'],
+  ['/term-dates', 'Term dates', 'ti-calendar-event', '#1d9e75'],
   ['/newsletters', 'Newsletters', 'ti-news', '#d85a30'],
   ['/letters', 'Letters home', 'ti-mail', '#8a5cf6'],
   ['/class-page', 'Class page', 'ti-users', '#e0872f'],

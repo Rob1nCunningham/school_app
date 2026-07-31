@@ -6,6 +6,7 @@ import AppShell from './components/AppShell.jsx'
 import Home from './pages/Home.jsx'
 import Messages from './pages/Messages.jsx'
 import CalendarPage from './pages/CalendarPage.jsx'
+import TermDates from './pages/TermDates.jsx'
 import Consent from './pages/Consent.jsx'
 import Newsletters from './pages/Newsletters.jsx'
 import Letters from './pages/Letters.jsx'
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/messages" element={<Messages />} />
         <Route path="/calendar" element={<CalendarPage />} />
+        <Route path="/term-dates" element={<TermDates />} />
         <Route path="/consent" element={<Consent />} />
         <Route path="/newsletters" element={<Newsletters />} />
         <Route path="/letters" element={<Letters />} />
