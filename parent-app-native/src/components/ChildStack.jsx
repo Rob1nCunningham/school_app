@@ -1,4 +1,4 @@
-import { View, Text, Image, Pressable, Linking, StyleSheet } from 'react-native'
+import { View, Text, Pressable, Linking, StyleSheet } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { useAuth } from '../lib/AuthContext.jsx'
 import { colors } from '../lib/theme.js'
@@ -20,7 +20,6 @@ export default function ChildStack() {
       {order.map((k, pos) => {
         const top = (n - 1 - pos) * PEEK
         const z = n - pos
-        const initials = k.name.split(' ').map((p) => p[0]).slice(0, 2).join('')
         return (
           <Pressable
             key={k.id}
@@ -42,11 +41,7 @@ export default function ChildStack() {
           >
             <View style={styles.row}>
               <View style={styles.avatar}>
-                {k.school?.logo_url ? (
-                  <Image source={{ uri: k.school.logo_url }} style={styles.logoImg} resizeMode="contain" />
-                ) : (
-                  <Text style={[styles.avatarText, { color: k.school?.brand_color || colors.fillPrimary }]}>{initials}</Text>
-                )}
+                <Ionicons name="person" size={18} color={k.school?.brand_color || colors.fillPrimary} />
               </View>
               <View>
                 <Text style={styles.name}>{k.name}</Text>
@@ -88,8 +83,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     overflow: 'hidden'
   },
-  logoImg: { width: '100%', height: '100%' },
-  avatarText: { fontSize: 13, fontWeight: '600' },
   name: { fontSize: 14, fontWeight: '600', color: '#fff' },
   sub: { marginTop: 2, fontSize: 11, color: 'rgba(255,255,255,0.85)' },
   websiteButton: {

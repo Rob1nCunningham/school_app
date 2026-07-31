@@ -17,7 +17,6 @@ export default function ChildStack() {
       {order.map((k, pos) => {
         const top = (n - 1 - pos) * PEEK
         const z = n - pos
-        const initials = k.name.split(' ').map((p) => p[0]).slice(0, 2).join('')
         return (
           <div key={k.id} onClick={() => setActiveChildId(k.id)}
             style={{
@@ -33,13 +32,8 @@ export default function ChildStack() {
                 width: 34, height: 34, borderRadius: 10, background: '#fff', flexShrink: 0,
                 display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden'
               }}>
-                {k.school?.logo_url ? (
-                  <img src={k.school.logo_url} alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-                ) : (
-                  <span style={{ color: k.school?.brand_color || 'var(--fill-primary)', fontWeight: 600, fontSize: 13 }}>
-                    {initials}
-                  </span>
-                )}
+                <i className="ti ti-user" aria-hidden="true"
+                  style={{ fontSize: 18, color: k.school?.brand_color || 'var(--fill-primary)' }} />
               </div>
               <div>
                 <p style={{ margin: 0, fontSize: 14, fontWeight: 600, fontFamily: "'Poppins',sans-serif" }}>{k.name}</p>
