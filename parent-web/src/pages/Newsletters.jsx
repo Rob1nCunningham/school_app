@@ -15,7 +15,9 @@ export default function Newsletters() {
 
   return (
     <div style={{ padding: 18 }}>
-      <h1 style={{ fontSize: 18, marginBottom: 4 }}>Newsletters</h1>
+      <h1 style={{ fontSize: 18, marginBottom: 4, display: 'flex', alignItems: 'center', gap: 8 }}>
+        <i className="ti ti-news" aria-hidden="true" style={{ fontSize: 18, color: '#d85a30' }} />Newsletters
+      </h1>
       <p style={{ fontSize: 12, color: 'var(--text-secondary)', margin: '0 0 16px' }}>From {activeChild?.school?.name}.</p>
       {items.map((n) => (
         <div key={n.id} style={{ background: 'var(--surface-1)', borderRadius: 10, padding: '12px 14px', marginBottom: 8 }}>

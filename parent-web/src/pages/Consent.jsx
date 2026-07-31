@@ -37,7 +37,9 @@ export default function Consent() {
 
   return (
     <div style={{ padding: 18 }}>
-      <h1 style={{ fontSize: 18, marginBottom: 4 }}>Consent & absence</h1>
+      <h1 style={{ fontSize: 18, marginBottom: 4, display: 'flex', alignItems: 'center', gap: 8 }}>
+        <i className="ti ti-shield-check" aria-hidden="true" style={{ fontSize: 18, color: '#2F6FE0' }} />Consent & absence
+      </h1>
       <p style={{ fontSize: 12, color: 'var(--text-secondary)', margin: '0 0 16px' }}>For {activeChild?.name}.</p>
       {forms.map((f) => {
         const responded = responses[f.id]

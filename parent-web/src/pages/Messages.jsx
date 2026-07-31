@@ -41,7 +41,9 @@ export default function Messages() {
 
   return (
     <div style={{ padding: 18 }}>
-      <h1 style={{ fontSize: 18, marginBottom: 4 }}>Messages</h1>
+      <h1 style={{ fontSize: 18, marginBottom: 4, display: 'flex', alignItems: 'center', gap: 8 }}>
+        <i className="ti ti-message-circle" aria-hidden="true" style={{ fontSize: 18, color: 'var(--text-accent)' }} />Messages
+      </h1>
       <p style={{ fontSize: 12, color: 'var(--text-secondary)', margin: '0 0 16px' }}>For {activeChild?.name}.</p>
       {messages.map((m) => {
         const isRead = !!readMap[m.id]

@@ -15,7 +15,9 @@ export default function ClassPage() {
 
   return (
     <div style={{ padding: 18 }}>
-      <h1 style={{ fontSize: 18, marginBottom: 4 }}>Class page</h1>
+      <h1 style={{ fontSize: 18, marginBottom: 4, display: 'flex', alignItems: 'center', gap: 8 }}>
+        <i className="ti ti-users" aria-hidden="true" style={{ fontSize: 18, color: '#e0872f' }} />Class page
+      </h1>
       <p style={{ fontSize: 12, color: 'var(--text-secondary)', margin: '0 0 16px' }}>{activeChild?.className}.</p>
       {posts.map((p) => (
         <div key={p.id} style={{ background: 'var(--surface-1)', borderRadius: 10, padding: '12px 14px', marginBottom: 8 }}>

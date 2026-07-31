@@ -15,7 +15,9 @@ export default function Surveys() {
 
   return (
     <div style={{ padding: 18 }}>
-      <h1 style={{ fontSize: 18, marginBottom: 4 }}>Surveys</h1>
+      <h1 style={{ fontSize: 18, marginBottom: 4, display: 'flex', alignItems: 'center', gap: 8 }}>
+        <i className="ti ti-clipboard-list" aria-hidden="true" style={{ fontSize: 18, color: '#2f9ce0' }} />Surveys
+      </h1>
       <p style={{ fontSize: 12, color: 'var(--text-secondary)', margin: '0 0 16px' }}>From {activeChild?.school?.name}.</p>
       {items.filter((s) => s.status === 'open').map((s) => (
         <div key={s.id} style={{ background: 'var(--surface-1)', borderRadius: 10, padding: '12px 14px', marginBottom: 8 }}>

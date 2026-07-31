@@ -7,7 +7,9 @@ export default function Profile() {
 
   return (
     <div style={{ padding: 18 }}>
-      <h1 style={{ fontSize: 18, marginBottom: 4 }}>Profile</h1>
+      <h1 style={{ fontSize: 18, marginBottom: 4, display: 'flex', alignItems: 'center', gap: 8 }}>
+        <i className="ti ti-user-circle" aria-hidden="true" style={{ fontSize: 18, color: 'var(--text-accent)' }} />Profile
+      </h1>
       <p style={{ fontSize: 12, color: 'var(--text-secondary)', margin: '0 0 16px' }}>{user?.email}</p>
 
       <p style={{ fontSize: 13, fontWeight: 500, margin: '0 0 8px' }}>Your children</p>
