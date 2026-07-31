@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>School admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600&display=swap">
+    <style>
+      :root {
+        --surface-1:#FFFFFF; --surface-2:#F7F8FA; --border:#E4E7EC; --border-strong:#C9D0DA;
+        --text-primary:#1A2333; --text-secondary:#5B6472; --text-muted:#8993A3;
+        --fill-primary:#2F6FE0; --on-primary:#FFFFFF;
+        --bg-accent:#E8EFFC; --text-accent:#2F6FE0; --border-accent:#2F6FE0;
+        --fill-danger:#DC4B4B; --on-danger:#FFFFFF; --bg-danger:#FCEAEA; --text-danger:#B23A3A;
+        --bg-success:#EAF7EF; --text-success:#1F7A46; --bg-warning:#FCF3E1; --text-warning:#8A5D14;
+      }
+      * { box-sizing: border-box; }
+      body { margin:0; font-family:'Inter',sans-serif; background:var(--surface-2); color:var(--text-primary); }
+      h1, h2 { font-family:'Poppins',sans-serif; font-weight:600; margin:0; }
+      input, select, textarea, button { font-family:'Inter',sans-serif; font-size:13px; }
+      input, select, textarea { padding:8px 10px; border:1px solid var(--border-strong); border-radius:8px; background:var(--surface-1); color:var(--text-primary); }
+      button { padding:8px 14px; border-radius:8px; border:1px solid var(--border-strong); background:var(--surface-1); color:var(--text-primary); cursor:pointer; }
+      button:hover { background:var(--surface-2); }
+      a { color: var(--text-accent); }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
