@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { NavLink, Outlet } from 'react-router-dom'
+import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { useAuth } from '../lib/AuthContext.jsx'
 import { supabase } from '../lib/supabaseClient.js'
 
@@ -14,6 +14,8 @@ export default function AppShell() {
   const { activeChild } = useAuth()
   const school = activeChild?.school
   const [unread, setUnread] = useState(0)
+  const location = useLocation()
+  const isHome = location.pathname === '/home'
 
   useEffect(() => {
     if (!activeChild) return
@@ -29,15 +31,17 @@ export default function AppShell() {
 
   return (
     <div style={{ maxWidth: 480, margin: '0 auto', minHeight: '100vh', background: 'var(--surface-2)', display: 'flex', flexDirection: 'column' }}>
-      <div style={{ background: school?.brand_color || 'var(--fill-primary)', color: '#fff', padding: '14px 18px', display: 'flex', alignItems: 'center', gap: 10 }}>
-        <div style={{ width: 34, height: 34, borderRadius: '50%', background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 600, flexShrink: 0 }}>
-          {initials}
+      {!isHome && (
+        <div style={{ background: school?.brand_color || 'var(--fill-primary)', color: '#fff', padding: '14px 18px', display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div style={{ width: 34, height: 34, borderRadius: '50%', background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 600, flexShrink: 0 }}>
+            {initials}
+          </div>
+          <div>
+            <p style={{ margin: 0, fontSize: 12, opacity: 0.85 }}>{school?.name}</p>
+            <p style={{ margin: '2px 0 0', fontSize: 15, fontWeight: 600 }}>{activeChild ? activeChild.name : ''}</p>
+          </div>
         </div>
-        <div>
-          <p style={{ margin: 0, fontSize: 12, opacity: 0.85 }}>{school?.name}</p>
-          <p style={{ margin: '2px 0 0', fontSize: 15, fontWeight: 600 }}>{activeChild ? activeChild.name : ''}</p>
-        </div>
-      </div>
+      )}
       <div style={{ flex: 1, paddingBottom: 70 }}>
         <Outlet />
       </div>

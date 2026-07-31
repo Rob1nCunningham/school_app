@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../lib/AuthContext.jsx'
+import ChildStack from '../components/ChildStack.jsx'
 
 const TILES = [
   ['/consent', 'Consent & absence', 'ti-shield-check', '#2F6FE0'],
@@ -11,26 +11,11 @@ const TILES = [
 ]
 
 export default function Home() {
-  const { kids, activeChildId, setActiveChildId } = useAuth()
   const navigate = useNavigate()
 
   return (
     <div style={{ padding: '18px' }}>
-      {kids && kids.length > 1 && (
-        <div style={{ display: 'flex', gap: 8, overflowX: 'auto', marginBottom: 16 }}>
-          {kids.map((k) => (
-            <button key={k.id} onClick={() => setActiveChildId(k.id)}
-              style={{
-                flexShrink: 0, fontSize: 12, padding: '6px 12px',
-                background: k.id === activeChildId ? 'var(--bg-accent)' : 'var(--surface-1)',
-                color: k.id === activeChildId ? 'var(--text-accent)' : 'var(--text-secondary)',
-                borderColor: k.id === activeChildId ? 'var(--border-accent)' : 'var(--border-strong)'
-              }}>
-              {k.name.split(' ')[0]}
-            </button>
-          ))}
-        </div>
-      )}
+      <ChildStack />
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 10, marginBottom: 20 }}>
         {TILES.map(([to, label, icon, color]) => (
