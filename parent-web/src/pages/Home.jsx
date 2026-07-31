@@ -55,7 +55,7 @@ export default function Home() {
       </div>
 
       <button onClick={() => navigate('/add-child')} style={{ width: '100%', marginTop: 20 }}>
-        Add another child
+        Check for new invites
       </button>
     </div>
   )

@@ -20,7 +20,7 @@ export default function Profile() {
       ))}
 
       <button onClick={() => navigate('/add-child')} style={{ width: '100%', marginTop: 10, marginBottom: 20 }}>
-        Add another child
+        Check for new invites
       </button>
 
       <button onClick={signOut} style={{ width: '100%', background: 'var(--bg-danger)', color: 'var(--text-danger)', border: 'none' }}>

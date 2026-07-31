@@ -13,6 +13,10 @@ export function AuthProvider({ children }) {
       setKids(null)
       return
     }
+    // Pick up any invite the school has sent to this account's email —
+    // this is what links the parent to their child, not a search.
+    await supabase.rpc('accept_pending_invites')
+
     const { data, error } = await supabase
       .from('parent_children')
       .select('student_id, students(id, first_name, last_name, class_id, classes(name, school_id, schools(*)))')
