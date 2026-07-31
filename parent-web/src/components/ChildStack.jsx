@@ -25,18 +25,46 @@ export default function ChildStack() {
               borderRadius: 16, background: k.school?.brand_color || 'var(--fill-primary)',
               zIndex: z, boxShadow: pos === 0 ? '0 6px 16px rgba(0,0,0,0.16)' : '0 6px 16px rgba(0,0,0,0.08)',
               cursor: n > 1 ? 'pointer' : 'default', transition: 'top 0.25s ease',
-              padding: '8px 16px 16px', boxSizing: 'border-box', color: '#fff'
+              padding: '14px 16px 16px', boxSizing: 'border-box', color: '#fff',
+              display: 'flex', flexDirection: 'column', justifyContent: 'space-between'
             }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <div style={{ width: 22, height: 22, borderRadius: '50%', background: 'rgba(255,255,255,0.22)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 600, flexShrink: 0 }}>
-                {initials}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <div style={{
+                width: 34, height: 34, borderRadius: 10, background: '#fff', flexShrink: 0,
+                display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden'
+              }}>
+                {k.school?.logo_url ? (
+                  <img src={k.school.logo_url} alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                ) : (
+                  <span style={{ color: k.school?.brand_color || 'var(--fill-primary)', fontWeight: 600, fontSize: 13 }}>
+                    {initials}
+                  </span>
+                )}
               </div>
-              <p style={{ margin: 0, fontSize: 13, fontWeight: 600, fontFamily: "'Poppins',sans-serif" }}>{k.name}</p>
+              <div>
+                <p style={{ margin: 0, fontSize: 14, fontWeight: 600, fontFamily: "'Poppins',sans-serif" }}>{k.name}</p>
+                {pos === 0 && (
+                  <p style={{ margin: '2px 0 0', fontSize: 11, opacity: 0.85 }}>
+                    {k.school?.name} · {k.className}
+                  </p>
+                )}
+              </div>
             </div>
-            {pos === 0 && (
-              <p style={{ margin: '10px 0 0 30px', fontSize: 11, opacity: 0.85 }}>
-                {k.school?.name} · {k.className}
-              </p>
+
+            {pos === 0 && k.school?.website_url && (
+              <a
+                href={k.school.website_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                style={{
+                  alignSelf: 'flex-start', display: 'inline-flex', alignItems: 'center', gap: 6,
+                  background: 'rgba(255,255,255,0.16)', color: '#fff', fontSize: 12, fontWeight: 500,
+                  padding: '8px 14px', borderRadius: 20, textDecoration: 'none'
+                }}>
+                Visit school website
+                <i className="ti ti-external-link" aria-hidden="true" style={{ fontSize: 14 }} />
+              </a>
             )}
           </div>
         )

@@ -1,4 +1,5 @@
-import { View, Text, Pressable, StyleSheet } from 'react-native'
+import { View, Text, Image, Pressable, Linking, StyleSheet } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
 import { useAuth } from '../lib/AuthContext.jsx'
 import { colors } from '../lib/theme.js'
 
@@ -35,19 +36,39 @@ export default function ChildStack() {
               zIndex: z,
               elevation: pos === 0 ? 6 : 2,
               padding: 16,
-              paddingTop: 8
+              paddingTop: 14,
+              justifyContent: 'space-between'
             }}
           >
             <View style={styles.row}>
               <View style={styles.avatar}>
-                <Text style={styles.avatarText}>{initials}</Text>
+                {k.school?.logo_url ? (
+                  <Image source={{ uri: k.school.logo_url }} style={styles.logoImg} resizeMode="contain" />
+                ) : (
+                  <Text style={[styles.avatarText, { color: k.school?.brand_color || colors.fillPrimary }]}>{initials}</Text>
+                )}
               </View>
-              <Text style={styles.name}>{k.name}</Text>
+              <View>
+                <Text style={styles.name}>{k.name}</Text>
+                {pos === 0 && (
+                  <Text style={styles.sub}>
+                    {k.school?.name} · {k.className}
+                  </Text>
+                )}
+              </View>
             </View>
-            {pos === 0 && (
-              <Text style={styles.sub}>
-                {k.school?.name} · {k.className}
-              </Text>
+
+            {pos === 0 && k.school?.website_url && (
+              <Pressable
+                onPress={(e) => {
+                  e.stopPropagation?.()
+                  Linking.openURL(k.school.website_url)
+                }}
+                style={styles.websiteButton}
+              >
+                <Text style={styles.websiteButtonText}>Visit school website</Text>
+                <Ionicons name="open-outline" size={14} color="#fff" />
+              </Pressable>
             )}
           </Pressable>
         )
@@ -57,16 +78,29 @@ export default function ChildStack() {
 }
 
 const styles = StyleSheet.create({
-  row: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  row: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   avatar: {
-    width: 22,
-    height: 22,
-    borderRadius: 11,
-    backgroundColor: 'rgba(255,255,255,0.22)',
+    width: 34,
+    height: 34,
+    borderRadius: 10,
+    backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    overflow: 'hidden'
   },
-  avatarText: { fontSize: 10, fontWeight: '600', color: '#fff' },
+  logoImg: { width: '100%', height: '100%' },
+  avatarText: { fontSize: 13, fontWeight: '600' },
   name: { fontSize: 14, fontWeight: '600', color: '#fff' },
-  sub: { marginTop: 10, marginLeft: 30, fontSize: 11, color: 'rgba(255,255,255,0.85)' }
+  sub: { marginTop: 2, fontSize: 11, color: 'rgba(255,255,255,0.85)' },
+  websiteButton: {
+    alignSelf: 'flex-start',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    backgroundColor: 'rgba(255,255,255,0.16)',
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 20
+  },
+  websiteButtonText: { color: '#fff', fontSize: 12, fontWeight: '500' }
 })

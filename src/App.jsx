@@ -14,6 +14,7 @@ import Newsletters from './pages/Newsletters.jsx'
 import Letters from './pages/Letters.jsx'
 import ClassPagesAdmin from './pages/ClassPagesAdmin.jsx'
 import Surveys from './pages/Surveys.jsx'
+import Settings from './pages/Settings.jsx'
 
 export default function App() {
   const { session, staffMember, isTeacher, loading } = useAuth()
@@ -45,6 +46,7 @@ export default function App() {
             <Route path="/class-pages" element={<ClassPagesAdmin />} />
             <Route path="/surveys" element={<Surveys />} />
             <Route path="/students" element={<Students />} />
+            <Route path="/settings" element={<Settings />} />
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </>
         )}

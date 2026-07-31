@@ -16,7 +16,8 @@ export default function AppShell() {
         ['/letters', 'Letters home'],
         ['/class-pages', 'Class pages'],
         ['/surveys', 'Surveys'],
-        ['/students', 'Students']
+        ['/students', 'Students'],
+        ['/settings', 'Settings']
       ]
 
   return (
