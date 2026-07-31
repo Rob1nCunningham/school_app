@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabaseClient.js'
 import { useAuth } from '../lib/AuthContext.jsx'
 
+const PARENT_APP_URL = 'https://school-app-npn5.vercel.app/'
+
 export default function Students() {
   const { school } = useAuth()
   const [groups, setGroups] = useState([])
@@ -10,6 +12,7 @@ export default function Students() {
   const [email, setEmail] = useState('')
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState(null)
+  const [notice, setNotice] = useState(null)
 
   async function load() {
     if (!school) return
@@ -40,24 +43,45 @@ export default function Students() {
     setOpenStudentId(openStudentId === id ? null : id)
     setEmail('')
     setError(null)
+    setNotice(null)
   }
 
-  async function sendInvite(studentId) {
+  async function sendInvite(student) {
     if (!email.trim()) return
     setBusy(true)
     setError(null)
+    setNotice(null)
     try {
       const { data: userData } = await supabase.auth.getUser()
+      const cleanEmail = email.trim().toLowerCase()
       const { error } = await supabase.from('parent_invites').insert({
         school_id: school.id,
-        student_id: studentId,
-        email: email.trim().toLowerCase(),
+        student_id: student.id,
+        email: cleanEmail,
         invited_by: userData.user.id
       })
       if (error) throw error
+
+      let emailWarning = null
+      try {
+        const { error: fnError } = await supabase.functions.invoke('send-invite-email', {
+          body: {
+            email: cleanEmail,
+            schoolName: school.name,
+            studentName: `${student.first_name} ${student.last_name}`,
+            appUrl: PARENT_APP_URL
+          }
+        })
+        if (fnError) emailWarning = fnError.message
+      } catch (fnErr) {
+        emailWarning = fnErr.message
+      }
+
       setEmail('')
-      setOpenStudentId(null)
       await load()
+      setNotice(emailWarning
+        ? `Invite created, but the email couldn't be sent (${emailWarning}). The parent can still be linked once they sign up with this email.`
+        : `Invite sent to ${cleanEmail}.`)
     } catch (err) {
       setError(err.message)
     } finally {
@@ -91,13 +115,14 @@ export default function Students() {
                     <div style={{ padding: '8px 10px', background: 'var(--surface-2)', borderRadius: 8, marginTop: 4, display: 'flex', gap: 8 }}>
                       <input type="email" placeholder="parent@email.com" value={email} onChange={(e) => setEmail(e.target.value)}
                         style={{ flex: 1, fontSize: 12 }} />
-                      <button disabled={busy} onClick={() => sendInvite(st.id)}
+                      <button disabled={busy} onClick={() => sendInvite(st)}
                         style={{ background: 'var(--fill-primary)', color: 'var(--on-primary)', border: 'none', fontSize: 12 }}>
                         {busy ? 'Sending…' : 'Invite parent'}
                       </button>
                     </div>
                   )}
                   {isOpen && error && <p style={{ fontSize: 11, color: 'var(--text-danger)', margin: '4px 0 0 10px' }}>{error}</p>}
+                  {isOpen && notice && <p style={{ fontSize: 11, color: 'var(--text-secondary)', margin: '4px 0 0 10px' }}>{notice}</p>}
                 </div>
               )
             })}
